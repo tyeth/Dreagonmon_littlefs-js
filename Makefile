@@ -21,8 +21,45 @@ CFLAGS += -m$(WORD)
 endif
 CFLAGS += -I. -Ilittlefs
 CFLAGS += -std=c99 -Wall -pedantic
+CFLAGS += -DLFS_MIGRATE
+# CFLAGS += -DLFS_YES_TRACE
 
-CFLAGS += -s RESERVED_FUNCTION_POINTERS=20
+LFLAGS = --memory-init-file 0
+LFLAGS += -sMODULARIZE=1
+LFLAGS += -sEXPORT_ES6=1
+LFLAGS += -sEXPORT_NAME="LFSM"
+LFLAGS += -sALLOW_TABLE_GROWTH=1
+LFLAGS += -sDYNAMIC_EXECUTION=0
+LFLAGS += -sWASM=0
+LFLAGS += -sSINGLE_FILE=1
+LFLAGS += -sENVIRONMENT="web"
+LFLAGS += -sEXPORTED_RUNTIME_METHODS="['cwrap','addFunction']"
+LFLAGS += -sEXPORTED_FUNCTIONS="[ \
+	'_lfs_format', \
+	'_lfs_mount', \
+	'_lfs_unmount', \
+	'_lfs_remove', \
+	'_lfs_rename', \
+	'_lfs_stat', \
+	'_lfs_file_open', \
+	'_lfs_file_close', \
+	'_lfs_file_sync', \
+	'_lfs_file_read', \
+	'_lfs_file_write', \
+	'_lfs_file_seek', \
+	'_lfs_file_truncate', \
+	'_lfs_file_tell', \
+	'_lfs_file_rewind', \
+	'_lfs_file_size', \
+	'_lfs_fs_traverse', \
+	'_lfs_mkdir', \
+	'_lfs_dir_open', \
+	'_lfs_dir_close', \
+	'_lfs_dir_read', \
+	'_lfs_dir_seek', \
+	'_lfs_dir_tell', \
+	'_lfs_dir_rewind' \
+]"
 
 
 all: $(TARGET)
@@ -42,6 +79,9 @@ test_%: tests/test_%.sh
 
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $^ $(LFLAGS) -o $@
+	rm -f $(OBJ)
+	rm -f $(DEP)
+	rm -f $(ASM)
 
 %.a: $(OBJ)
 	$(AR) rcs $@ $^

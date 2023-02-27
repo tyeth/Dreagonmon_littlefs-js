@@ -1,0 +1,19 @@
+{
+  "name": "littlefs-js",
+  "version": "2.5.1",
+  "description": "This project puts together two things that should probably never go together:   embedded system filesystems, and web-side javascript.",
+  "type": "module",
+  "scripts": {
+    "test": "node demo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dreagonmon/littlefs-js.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dreagonmon/littlefs-js/issues"
+  },
+  "homepage": "https://github.com/Dreagonmon/littlefs-js#readme"
+}
