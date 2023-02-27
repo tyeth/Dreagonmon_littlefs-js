@@ -5,26 +5,28 @@ import { MemoryBlockDevice, LFS, LFS_O_CREAT, LFS_O_RDONLY, LFS_O_TRUNC, LFS_O_W
 const bdev = new MemoryBlockDevice(512, 2048);
 const lfs = new LFS(bdev, 100);
 // console.log(lfs);
-console.log("format:", lfs.format());
-console.log("mount:", lfs.mount());
-let file = lfs.open("/test.txt", LFS_O_WRONLY | LFS_O_CREAT | LFS_O_TRUNC);
+console.log("format:", await lfs.format());
+console.log("mount:", await lfs.mount());
+let file = await lfs.open("/test.txt", LFS_O_WRONLY | LFS_O_CREAT | LFS_O_TRUNC);
 console.log("open:", typeof(file) == "number" ? file : "successed.");
 let data = new TextEncoder().encode("Hello 你好 World 世界");
-let data_size = file.write(data)
+let data_size = await file.write(data)
 console.log("write:", data_size);
-console.log("sync:", file.sync());
-console.log("close:", file.close());
+console.log("tell:", await file.tell());
+console.log("sync:", await file.sync());
+console.log("close:", await file.close());
 
-file = lfs.open("/test.txt", LFS_O_RDONLY);
+file = await lfs.open("/test.txt", LFS_O_RDONLY);
 console.log("open:", typeof(file) == "number" ? file : "successed.");
-data = file.read(data_size);
+data = await file.read(data_size);
 console.log("read:", typeof(data) == "number" ? data : new TextDecoder().decode(data));
-console.log("close:", file.close());
+console.log("close:", await file.close());
 
-let dir = lfs.opendir("/");
+let dir = await lfs.opendir("/");
 console.log("opendir:", typeof(dir) == "number" ? dir : "successed.");
-console.log("read dir:", dir.read());
-console.log("read dir:", dir.read());
-console.log("read dir:", dir.read());
-console.log("read dir:", dir.read());
-console.log("stat '/test.txt':", lfs.stat("/test.txt"));
+console.log("read dir:", await dir.read());
+console.log("read dir:", await dir.read());
+console.log("read dir:", await dir.read());
+console.log("read dir:", await dir.read());
+console.log("stat '/test.txt':", await lfs.stat("/test.txt"));
+await lfs.traverse(async (block) => { await (new Promise(r => setTimeout(r, 100))); console.log("traverse block", block); })

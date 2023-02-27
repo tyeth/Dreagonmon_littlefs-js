@@ -7,6 +7,79 @@
 #include <stdlib.h>
 #include <emscripten.h>
 
+EM_ASYNC_JS(int, _read_promise, (const struct lfs_config *c, lfs_block_t block,
+    lfs_off_t off, void *buffer, lfs_size_t size), {
+    let lfs = Module.globalLFSObject.get(c);
+    if (lfs != null) {
+        let ret = lfs._readthunk(block, off, buffer, size);
+        if (ret instanceof Promise) {
+            return await ret;
+        } else {
+            return ret;
+        }
+    }
+    return -5;
+})
+
+EM_ASYNC_JS(int, _prog_promise, (const struct lfs_config *c, lfs_block_t block,
+    lfs_off_t off, const void *buffer, lfs_size_t size), {
+    let lfs = Module.globalLFSObject.get(c);
+    if (lfs != null) {
+        let ret = lfs._progthunk(block, off, buffer, size);
+        if (ret instanceof Promise) {
+            return await ret;
+        } else {
+            return ret;
+        }
+    }
+    return -5;
+})
+
+EM_ASYNC_JS(int, _erase_promise, (const struct lfs_config *c, lfs_block_t block), {
+    let lfs = Module.globalLFSObject.get(c);
+    if (lfs != null) {
+        let ret = lfs._erasethunk(block);
+        if (ret instanceof Promise) {
+            return await ret;
+        } else {
+            return ret;
+        }
+    }
+    return -5;
+})
+
+EM_ASYNC_JS(int, _sync_promise, (const struct lfs_config *c), {
+    let lfs = Module.globalLFSObject.get(c);
+    if (lfs != null) {
+        let ret = lfs._syncthunk();
+        if (ret instanceof Promise) {
+            return await ret;
+        } else {
+            return ret;
+        }
+    }
+    return -5;
+})
+
+EM_ASYNC_JS(int, _traverse_promise, (const struct lfs_config *c, lfs_block_t block), {
+    let lfs = Module.globalLFSObject.get(c);
+    if (lfs != null) {
+        let ret = lfs._traversethunk(block);
+        if (ret instanceof Promise) {
+            return await ret;
+        } else {
+            return ret;
+        }
+    }
+    return -5;
+})
+
+typedef int (*traverse_callback)(void*, lfs_block_t);
+
+int _traverse_callback(void* c, lfs_block_t block) {
+    return _traverse_promise(c, block);
+}
+
 
 // javascript binding functions
 EMSCRIPTEN_KEEPALIVE
@@ -16,12 +89,6 @@ lfs_t *lfs_new(void) {
 
 EMSCRIPTEN_KEEPALIVE
 const struct lfs_config *lfs_new_config(
-        int (*read)(const struct lfs_config *c, lfs_block_t block,
-            lfs_off_t off, void *buffer, lfs_size_t size),
-        int (*prog)(const struct lfs_config *c, lfs_block_t block,
-            lfs_off_t off, const void *buffer, lfs_size_t size),
-        int (*erase)(const struct lfs_config *c, lfs_block_t block),
-        int (*sync)(const struct lfs_config *c),
         lfs_size_t block_size,
         lfs_size_t block_count,
         int32_t block_cycles) {
@@ -29,10 +96,10 @@ const struct lfs_config *lfs_new_config(
     struct lfs_config *cfg = malloc(sizeof(struct lfs_config));
     memset(cfg, 0, sizeof(struct lfs_config));
 
-    cfg->read = read;
-    cfg->prog = prog;
-    cfg->erase = erase;
-    cfg->sync = sync;
+    cfg->read = _read_promise;
+    cfg->prog = _prog_promise;
+    cfg->erase = _erase_promise;
+    cfg->sync = _sync_promise;
     cfg->read_size = block_size;
     cfg->prog_size = block_size;
     cfg->block_size = block_size;
@@ -57,6 +124,11 @@ struct lfs_file *lfs_new_file(void) {
 EMSCRIPTEN_KEEPALIVE
 struct lfs_dir *lfs_new_dir(void) {
     return malloc(sizeof(struct lfs_dir));
+}
+
+EMSCRIPTEN_KEEPALIVE
+traverse_callback get_traverse_callback(void) {
+    return _traverse_callback;
 }
 
 EMSCRIPTEN_KEEPALIVE

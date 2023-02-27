@@ -4,43 +4,43 @@ const Module = await LFSM();
 const _n_ = 'number';
 const _s_ = 'string';
 const _lfs_new = Module.cwrap('lfs_new', _n_, []);
-const _lfs_new_config = Module.cwrap('lfs_new_config', _n_,
-    [ _n_, _n_, _n_, _n_, _n_, _n_, _n_ ]);
+const _lfs_new_config = Module.cwrap('lfs_new_config', _n_, [ _n_, _n_, _n_ ]);
 const _lfs_new_info = Module.cwrap('lfs_new_info', _n_, []);
 const _lfs_new_file = Module.cwrap('lfs_new_file', _n_, []);
 const _lfs_new_dir = Module.cwrap('lfs_new_dir', _n_, []);
 
-const _lfs_format = Module.cwrap('lfs_format', _n_, [ _n_, _n_ ]);
-const _lfs_mount = Module.cwrap('lfs_mount', _n_, [ _n_, _n_ ]);
-const _lfs_unmount = Module.cwrap('lfs_unmount', _n_, [ _n_ ]);
-const _lfs_remove = Module.cwrap('lfs_remove', _n_, [ _n_, _s_ ]);
-const _lfs_rename = Module.cwrap('lfs_rename', _n_, [ _n_, _s_, _s_ ]);
-const _lfs_stat = Module.cwrap('lfs_stat', _n_, [ _n_, _s_, _n_ ]);
+const _lfs_format = Module.cwrap('lfs_format', _n_, [ _n_, _n_ ], { async: true });
+const _lfs_mount = Module.cwrap('lfs_mount', _n_, [ _n_, _n_ ], { async: true });
+const _lfs_unmount = Module.cwrap('lfs_unmount', _n_, [ _n_ ], { async: true });
+const _lfs_remove = Module.cwrap('lfs_remove', _n_, [ _n_, _s_ ], { async: true });
+const _lfs_rename = Module.cwrap('lfs_rename', _n_, [ _n_, _s_, _s_ ], { async: true });
+const _lfs_stat = Module.cwrap('lfs_stat', _n_, [ _n_, _s_, _n_ ], { async: true });
 
-const _lfs_file_open = Module.cwrap('lfs_file_open', _n_, [ _n_, _n_, _s_, _n_ ]);
-const _lfs_file_close = Module.cwrap('lfs_file_close', _n_, [ _n_, _n_ ]);
-const _lfs_file_sync = Module.cwrap('lfs_file_sync', _n_, [ _n_, _n_ ]);
-const _lfs_file_read = Module.cwrap('lfs_file_read', _n_, [ _n_, _n_, _n_, _n_ ]);
-const _lfs_file_write = Module.cwrap('lfs_file_write', _n_, [ _n_, _n_, _n_, _n_ ]);
-const _lfs_file_seek = Module.cwrap('lfs_file_seek', _n_, [ _n_, _n_, _n_, _n_ ]);
-const _lfs_file_truncate = Module.cwrap('_lfs_file_truncate', _n_, [ _n_, _n_, _n_ ]);
-const _lfs_file_tell = Module.cwrap('lfs_file_tell', _n_, [ _n_, _n_ ]);
-const _lfs_file_rewind = Module.cwrap('lfs_file_rewind', _n_, [ _n_, _n_ ]);
-const _lfs_file_size = Module.cwrap('lfs_file_size', _n_, [ _n_, _n_ ]);
+const _lfs_file_open = Module.cwrap('lfs_file_open', _n_, [ _n_, _n_, _s_, _n_ ], { async: true });
+const _lfs_file_close = Module.cwrap('lfs_file_close', _n_, [ _n_, _n_ ], { async: true });
+const _lfs_file_sync = Module.cwrap('lfs_file_sync', _n_, [ _n_, _n_ ], { async: true });
+const _lfs_file_read = Module.cwrap('lfs_file_read', _n_, [ _n_, _n_, _n_, _n_ ], { async: true });
+const _lfs_file_write = Module.cwrap('lfs_file_write', _n_, [ _n_, _n_, _n_, _n_ ], { async: true });
+const _lfs_file_seek = Module.cwrap('lfs_file_seek', _n_, [ _n_, _n_, _n_, _n_ ], { async: true });
+const _lfs_file_truncate = Module.cwrap('_lfs_file_truncate', _n_, [ _n_, _n_, _n_ ], { async: true });
+const _lfs_file_tell = Module.cwrap('lfs_file_tell', _n_, [ _n_, _n_ ], { async: true });
+const _lfs_file_rewind = Module.cwrap('lfs_file_rewind', _n_, [ _n_, _n_ ], { async: true });
+const _lfs_file_size = Module.cwrap('lfs_file_size', _n_, [ _n_, _n_ ], { async: true });
 
-const _lfs_fs_traverse = Module.cwrap('lfs_fs_traverse', _n_, [ _n_, _n_, _n_ ]);
+const _lfs_fs_traverse = Module.cwrap('lfs_fs_traverse', _n_, [ _n_, _n_, _n_ ], { async: true });
 
-const _lfs_mkdir = Module.cwrap('lfs_mkdir', _n_, [ _n_, _s_ ]);
-const _lfs_dir_open = Module.cwrap('lfs_dir_open', _n_, [ _n_, _n_, _s_ ]);
-const _lfs_dir_close = Module.cwrap('lfs_dir_close', _n_, [ _n_, _n_ ]);
-const _lfs_dir_read = Module.cwrap('lfs_dir_read', _n_, [ _n_, _n_, _n_ ]);
-const _lfs_dir_seek = Module.cwrap('lfs_dir_seek', _n_, [ _n_, _n_, _n_ ]);
-const _lfs_dir_tell = Module.cwrap('lfs_dir_tell', _n_, [ _n_, _n_ ]);
-const _lfs_dir_rewind = Module.cwrap('lfs_dir_rewind', _n_, [ _n_, _n_ ]);
+const _lfs_mkdir = Module.cwrap('lfs_mkdir', _n_, [ _n_, _s_ ], { async: true });
+const _lfs_dir_open = Module.cwrap('lfs_dir_open', _n_, [ _n_, _n_, _s_ ], { async: true });
+const _lfs_dir_close = Module.cwrap('lfs_dir_close', _n_, [ _n_, _n_ ], { async: true });
+const _lfs_dir_read = Module.cwrap('lfs_dir_read', _n_, [ _n_, _n_, _n_ ], { async: true });
+const _lfs_dir_seek = Module.cwrap('lfs_dir_seek', _n_, [ _n_, _n_, _n_ ], { async: true });
+const _lfs_dir_tell = Module.cwrap('lfs_dir_tell', _n_, [ _n_, _n_ ], { async: true });
+const _lfs_dir_rewind = Module.cwrap('lfs_dir_rewind', _n_, [ _n_, _n_ ], { async: true });
+
+const _get_traverse_callback = Module.cwrap('get_traverse_callback', _n_, []);
 
 const _malloc = Module.cwrap('raw_malloc', _n_, [ _n_ ]);
 const _free = Module.cwrap('raw_free', null, [ _n_ ]);
-const _async_sleep = Module.cwrap('raw_sleep', null, [ _n_ ]);
 /**
  * @param {number} p 
  * @param {number} size 
@@ -117,11 +117,18 @@ export const LFS_SEEK_END = 2;
 
 // block device class
 export class BlockDevice {
+    constructor () {
+        /** @type {number} */
+        this.block_size = 0;
+        /** @type {number} */
+        this.block_count = 0;
+    }
     /**
      * @param {number} block 
      * @param {number} off 
      * @param {number} buffer 
      * @param {number} size 
+     * @returns {number | Promise<number>}
      */
     read (block, off, buffer, size) {
         throw Error("Not Implement");
@@ -131,15 +138,23 @@ export class BlockDevice {
      * @param {number} off 
      * @param {number} buffer 
      * @param {number} size 
+     * @returns {number | Promise<number>}
      */
     prog (block, off, buffer, size) {
         throw Error("Not Implement");
     }
     /**
      * @param {number} block 
+     * @returns {number | Promise<number>}
      */
     erase (block) {
-        throw Error("Not Implement");
+        return 0;
+    }
+    /**
+     * @returns {number | Promise<number>}
+     */
+    sync () {
+        return 0;
     }
 }
 
@@ -150,7 +165,7 @@ export class MemoryBlockDevice extends BlockDevice {
         this.block_count = block_count;
         this._storage = [];
     }
-    read (block, off, buffer, size) {
+    async read (block, off, buffer, size) {
         if (this.onread) {
             if (this.onread(block, off, size) == false) {
                 return 0;
@@ -166,7 +181,7 @@ export class MemoryBlockDevice extends BlockDevice {
             buffer);
         return 0;
     }
-    prog (block, off, buffer, size) {
+    async prog (block, off, buffer, size) {
         if (this.onprog) {
             if (this.onprog(block, off, size) == false) {
                 return 0;
@@ -182,7 +197,7 @@ export class MemoryBlockDevice extends BlockDevice {
             off);
         return 0;
     }
-    erase (block) {
+    async erase (block) {
         if (this.onerase) {
             this.onerase(block);
         }
@@ -195,51 +210,17 @@ export class MemoryBlockDevice extends BlockDevice {
 // wrap bd functions in C runtime
 // needs global thunks due to emscripten limitations
 /** @type {Map<number, LFS>} */
-const globalLFSObject = new Map();
-const globalCFunctions = {
-    _readptr: Module.addFunction(function (cfg,
-        block, off, buffer, size) {
-        if (globalLFSObject.has(cfg)) {
-            const lfs = globalLFSObject.get(cfg);
-            return lfs._readthunk(block, off, buffer, size);
-        } else {
-            return LFS_ERR_CORRUPT;
-        }
-    }),
-    _progptr: Module.addFunction(function (cfg,
-        block, off, buffer, size) {
-        if (globalLFSObject.has(cfg)) {
-            const lfs = globalLFSObject.get(cfg);
-            return lfs._progthunk(block, off, buffer, size);
-        } else {
-            return LFS_ERR_CORRUPT;
-        }
-    }),
-    _eraseptr: Module.addFunction(function (cfg, block) {
-        if (globalLFSObject.has(cfg)) {
-            const lfs = globalLFSObject.get(cfg);
-            return lfs._erasethunk(block);
-        } else {
-            return LFS_ERR_CORRUPT;
-        }
-    }),
-    _syncptr: Module.addFunction(function (cfg) {
-        if (globalLFSObject.has(cfg)) {
-            const lfs = globalLFSObject.get(cfg);
-            return lfs._syncthunk();
-        } else {
-            return LFS_ERR_CORRUPT;
-        }
-    }),
-    _traverseptr: Module.addFunction(function (cfg, block) {
-        if (globalLFSObject.has(cfg)) {
-            const lfs = globalLFSObject.get(cfg);
-            return lfs._traverseptr(block);
-        } else {
-            return LFS_ERR_CORRUPT;
-        }
-    }),
-};
+Module.globalLFSObject = new Map();
+/** @type {Map<number, LFS>} */
+const globalLFSObject = Module.globalLFSObject;
+
+/**
+ * LFSInfo
+ * @typedef {Object} LFSInfo
+ * @property {number} type item type, LFS_TYPE_REG or LFS_TYPE_DIR
+ * @property {number} size file size, only valid for LFS_TYPE_REG items
+ * @property {string} name item name
+ */
 
 // LFS class
 export class LFS {
@@ -263,7 +244,11 @@ export class LFS {
         this._erasethunk = (bd.erase || function () { return 0; }).bind(bd);
         this._syncthunk = (bd.sync || function () { return 0; }).bind(bd);
     }
-    format () {
+    /**
+     * format
+     * @returns {Promise<number>}
+     */
+    async format () {
         if (this._mount) {
             // need unmount filesystems first
             return LFS_ERR_IO;
@@ -271,7 +256,6 @@ export class LFS {
 
         // allocate memory
         this._lfs_config = _lfs_new_config(
-            globalCFunctions._readptr, globalCFunctions._progptr, globalCFunctions._eraseptr, globalCFunctions._syncptr,
             this.block_size, this.block_count,
             this.block_cycles);
         this._lfs = _lfs_new();
@@ -279,7 +263,7 @@ export class LFS {
         globalLFSObject.set(this._lfs_config, this);
 
         // call format
-        let err = _lfs_format(this._lfs, this._lfs_config);
+        let err = await _lfs_format(this._lfs, this._lfs_config);
 
         // clean up
         globalLFSObject.delete(this._lfs_config);
@@ -288,14 +272,17 @@ export class LFS {
 
         return err;
     }
-    mount () {
+    /**
+     * mount
+     * @returns {Promise<number>}
+     */
+    async mount () {
         if (this._mount) {
             return 0;
         }
 
         // allocate memory
         this._lfs_config = _lfs_new_config(
-            globalCFunctions._readptr, globalCFunctions._progptr, globalCFunctions._eraseptr, globalCFunctions._syncptr,
             this.block_size, this.block_count,
             this.block_cycles);
         this._lfs = _lfs_new();
@@ -303,7 +290,7 @@ export class LFS {
         globalLFSObject.set(this._lfs_config, this);
 
         // call mount
-        let err = _lfs_mount(this._lfs, this._lfs_config);
+        let err = await _lfs_mount(this._lfs, this._lfs_config);
         if (err >= 0) {
             this._mount = true;
         } else {
@@ -314,14 +301,18 @@ export class LFS {
         }
         return err;
     }
-    unmount () {
+    /**
+     * unmount
+     * @returns {Promise<number>}
+     */
+    async unmount () {
         if (!this._mount) {
             // need mount first
             return LFS_ERR_IO;
         }
 
         // call unmount
-        let err = _lfs_unmount(this._lfs);
+        let err = await _lfs_unmount(this._lfs);
 
         // clean up
         globalLFSObject.delete(this._lfs_config);
@@ -332,16 +323,32 @@ export class LFS {
 
         return err;
     }
-    remove (path) {
-        return _lfs_remove(this._lfs, path);
+    /**
+     * remove
+     * @param {string} path 
+     * @returns {Promise<number}
+     */
+    async remove (path) {
+        return await _lfs_remove(this._lfs, path);
     }
-    rename (oldpath, newpath) {
-        return _lfs_rename(this._lfs, oldpath, newpath);
+    /**
+     * rename
+     * @param {string} oldpath 
+     * @param {string} newpath 
+     * @returns {Promise<number}
+     */
+    async rename (oldpath, newpath) {
+        return await _lfs_rename(this._lfs, oldpath, newpath);
     }
-    stat (path) {
+    /**
+     * stat
+     * @param {string} path 
+     * @returns {Promise<LFSInfo |number}
+     */
+    async stat (path) {
         // fill out butter with stat
         let info = _lfs_new_info();
-        let err = _lfs_stat(this._lfs, path, info);
+        let err = await _lfs_stat(this._lfs, path, info);
         if (err) {
             // return err code instead of object
             _free(info);
@@ -361,35 +368,46 @@ export class LFS {
      * open a file
      * @param {string} name 
      * @param {number} flags 
-     * @returns {LFSFile | number}
+     * @returns {Promise<LFSFile | number>}
      */
-    open (name, flags) {
+    async open (name, flags) {
         let res = new LFSFile(this, name, flags);
+        await res._init();
         if (res.err) {
             return res.err;
         }
 
         return res;
     }
-    mkdir (path) {
-        return _lfs_mkdir(this._lfs, path);
+    /**
+     * mkdir
+     * @param {string} path 
+     * @returns {Promise<number}
+     */
+    async mkdir (path) {
+        return await _lfs_mkdir(this._lfs, path);
     }
     /**
      * open a dir
      * @param {string} name 
-     * @returns {LFSDir | number}
+     * @returns {Promise<LFSDir | number>}
      */
-    opendir (name) {
+    async opendir (name) {
         let res = new LFSDir(this, name);
+        await res._init();
         if (res.err) {
             return res.err;
         }
 
         return res;
     }
-    traverse (cb) {
+    /**
+     * @param {(number) => number} cb 
+     * @returns {Promise<number>}
+     */
+    async traverse (cb) {
         this._traversethunk = cb;
-        return _lfs_fs_traverse(this._lfs, globalCFunctions._traverseptr, 0);
+        return await _lfs_fs_traverse(this._lfs, _get_traverse_callback(), this._lfs_config);
     }
 }
 
@@ -398,10 +416,12 @@ class LFSFile {
         /** @type {LFS} */
         this.lfs = lfs;
         this.name = name;
-
+        this.flags = flags;
+    }
+    async _init () {
         // allocate memory and open file
         this._file = _lfs_new_file();
-        let err = _lfs_file_open(this.lfs._lfs, this._file, name, flags);
+        let err = await _lfs_file_open(this.lfs._lfs, this._file, this.name, this.flags);
         if (err < 0) {
             _free(this._file);
             this.err = err;
@@ -409,32 +429,32 @@ class LFSFile {
     }
     /**
      * close
-     * @returns {number}
+     * @returns {Promise<number>}
      */
-    close () {
-        let err = _lfs_file_close(this.lfs._lfs, this._file);
+    async close () {
+        let err = await _lfs_file_close(this.lfs._lfs, this._file);
         _free(this._file);
         return err;
     }
     /**
      * sync
-     * @returns {number}
+     * @returns {Promise<number>}
      */
-    sync () {
-        return _lfs_file_sync(this.lfs._lfs, this._file);
+    async sync () {
+        return await _lfs_file_sync(this.lfs._lfs, this._file);
     }
     /**
      * read
      * @param {number} size 
-     * @returns {Uint8Array | number}
+     * @returns {Promise<Uint8Array | number>}
      */
-    read (size) {
+    async read (size) {
         if (!size) {
             size = this.size();
         }
 
         let buffer = _malloc(size);
-        let res = _lfs_file_read(this.lfs._lfs, this._file, buffer, size);
+        let res = await _lfs_file_read(this.lfs._lfs, this._file, buffer, size);
         if (res < 0) {
             _free(buffer);
             return res;
@@ -447,9 +467,9 @@ class LFSFile {
     /**
      * write
      * @param {Uint8Array} data 
-     * @returns {number}
+     * @returns {Promise<number>}
      */
-    write (data) {
+    async write (data) {
         let buffer = _malloc(data.length);
         let i = 0;
         while (i < data.length) {
@@ -457,7 +477,7 @@ class LFSFile {
             i++;
         }
 
-        let res = _lfs_file_write(this.lfs._lfs, this._file, buffer, data.length);
+        let res = await _lfs_file_write(this.lfs._lfs, this._file, buffer, data.length);
         _free(buffer);
         return res;
     }
@@ -465,39 +485,39 @@ class LFSFile {
      * seek
      * @param {number} offset 
      * @param {number} whence 
-     * @returns {number}
+     * @returns {Promise<number>}
      */
-    seek (offset, whence) {
-        return _lfs_file_seek(this.lfs._lfs, this._file, offset, whence);
+    async seek (offset, whence) {
+        return await _lfs_file_seek(this.lfs._lfs, this._file, offset, whence);
     }
     /**
      * truncate
      * @param {number} size 
-     * @returns {number}
+     * @returns {Promise<number>}
      */
-    truncate (size) {
-        return _lfs_file_truncate(this.lfs._lfs, this._file, size);
+    async truncate (size) {
+        return await _lfs_file_truncate(this.lfs._lfs, this._file, size);
     }
     /**
      * tell
-     * @returns {number}
+     * @returns {Promise<number>}
      */
-    tell () {
-        return _lfs_file_tell(this.lfs._lfs, this._file);
+    async tell () {
+        return await _lfs_file_tell(this.lfs._lfs, this._file);
     }
     /**
      * rewind
-     * @returns {number}
+     * @returns {Promise<number>}
      */
-    rewind () {
-        return _lfs_file_rewind(this.lfs._lfs, this._file);
+    async rewind () {
+        return await _lfs_file_rewind(this.lfs._lfs, this._file);
     }
     /**
      * size
-     * @returns {number}
+     * @returns {Promise<number>}
      */
-    size () {
-        return _lfs_file_size(this.lfs._lfs, this._file);
+    async size () {
+        return await _lfs_file_size(this.lfs._lfs, this._file);
     }
 }
 
@@ -506,24 +526,33 @@ class LFSDir {
         /** @type {LFS} */
         this.lfs = lfs;
         this.name = name;
-
+    }
+    async _init () {
         // allocate memory and open dir
         this._dir = _lfs_new_dir();
-        let err = _lfs_dir_open(this.lfs._lfs, this._dir, name);
+        let err = await _lfs_dir_open(this.lfs._lfs, this._dir, this.name);
         if (err < 0) {
             _free(this._dir);
             this.err = err;
         }
     }
-    close () {
-        let err = _lfs_dir_close(this.lfs._lfs, this._dir);
+    /**
+     * close
+     * @returns {Promise<number>}
+     */
+    async close () {
+        let err = await _lfs_dir_close(this.lfs._lfs, this._dir);
         _free(this._dir);
         return err;
     }
-    read () {
+    /**
+     * read
+     * @returns {Promise<LFSInfo | number>}
+     */
+    async read () {
         // fill out butter with dir read
         let info = _lfs_new_info();
-        let err = _lfs_dir_read(this.lfs._lfs, this._dir, info);
+        let err = await _lfs_dir_read(this.lfs._lfs, this._dir, info);
         if (err == 0) {
             // return null when complete
             _free(info);
@@ -543,13 +572,26 @@ class LFSDir {
         _free(info);
         return res;
     }
-    seek (off) {
-        return _lfs_dir_seek(this.lfs._lfs, this._dir, off);
+    /**
+     * seek
+     * @param {number} offset 
+     * @returns {Promise<number>}
+     */
+    async seek (off) {
+        return await _lfs_dir_seek(this.lfs._lfs, this._dir, off);
     }
-    tell () {
-        return _lfs_dir_tell(this.lfs._lfs, this._dir);
+    /**
+     * tell
+     * @returns {Promise<number>}
+     */
+    async tell () {
+        return await _lfs_dir_tell(this.lfs._lfs, this._dir);
     }
-    rewind () {
-        return _lfs_dir_rewind(this.lfs._lfs, this._dir);
+    /**
+     * rewind
+     * @returns {Promise<number>}
+     */
+    async rewind () {
+        return await _lfs_dir_rewind(this.lfs._lfs, this._dir);
     }
 }
