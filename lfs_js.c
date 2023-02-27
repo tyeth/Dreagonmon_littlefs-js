@@ -68,3 +68,8 @@ EMSCRIPTEN_KEEPALIVE
 void raw_free(void *p) {
     free(p);
 }
+
+EMSCRIPTEN_KEEPALIVE
+void raw_sleep(uint32_t ms) {
+    emscripten_sleep(ms);
+}

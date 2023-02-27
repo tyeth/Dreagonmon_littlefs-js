@@ -1,8 +1,3 @@
-import LFSM from "./lfs.js";
-
-let Module = await LFSM();
-globalThis["Module"] = Module;
-
 import { MemoryBlockDevice, LFS, LFS_O_CREAT, LFS_O_RDONLY, LFS_O_TRUNC, LFS_O_WRONLY } from "./lfs_js.js";
 
 // console.log(Module);
