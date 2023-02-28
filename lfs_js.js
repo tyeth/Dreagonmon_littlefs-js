@@ -1,5 +1,6 @@
 import LFSM from "./lfs.js";
 const Module = await LFSM();
+export const LFSModule = Module;
 // link in C functions
 const _n_ = 'number';
 const _s_ = 'string';
