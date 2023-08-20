@@ -89,6 +89,8 @@ lfs_t *lfs_new(void) {
 
 EMSCRIPTEN_KEEPALIVE
 const struct lfs_config *lfs_new_config(
+        lfs_size_t read_size,
+        lfs_size_t prog_size,
         lfs_size_t block_size,
         lfs_size_t block_count,
         int32_t block_cycles) {
@@ -100,8 +102,8 @@ const struct lfs_config *lfs_new_config(
     cfg->prog = _prog_promise;
     cfg->erase = _erase_promise;
     cfg->sync = _sync_promise;
-    cfg->read_size = block_size;
-    cfg->prog_size = block_size;
+    cfg->read_size = read_size;
+    cfg->prog_size = prog_size;
     cfg->block_size = block_size;
     cfg->cache_size = block_size;
     cfg->lookahead_size = block_size;

@@ -5,7 +5,7 @@ export const LFSModule = Module;
 const _n_ = 'number';
 const _s_ = 'string';
 const _lfs_new = Module.cwrap('lfs_new', _n_, []);
-const _lfs_new_config = Module.cwrap('lfs_new_config', _n_, [ _n_, _n_, _n_ ]);
+const _lfs_new_config = Module.cwrap('lfs_new_config', _n_, [ _n_, _n_, _n_, _n_, _n_ ]);
 const _lfs_new_info = Module.cwrap('lfs_new_info', _n_, []);
 const _lfs_new_file = Module.cwrap('lfs_new_file', _n_, []);
 const _lfs_new_dir = Module.cwrap('lfs_new_dir', _n_, []);
@@ -120,6 +120,10 @@ export const LFS_SEEK_END = 2;
 export class BlockDevice {
     constructor () {
         /** @type {number} */
+        this.read_size = 0;
+        /** @type {number} */
+        this.prog_size = 0;
+        /** @type {number} */
         this.block_size = 0;
         /** @type {number} */
         this.block_count = 0;
@@ -162,6 +166,8 @@ export class BlockDevice {
 export class MemoryBlockDevice extends BlockDevice {
     constructor (block_size, block_count) {
         super();
+        this.read_size = block_size;
+        this.prog_size = block_size;
         this.block_size = block_size;
         this.block_count = block_count;
         this._storage = [];
@@ -235,6 +241,8 @@ export class LFS {
         this._mount = false;
 
         // setup config
+        this.read_size = bd.read_size;
+        this.prog_size = bd.prog_size;
         this.block_size = bd.block_size;
         this.block_count = bd.block_count;
         this.block_cycles = block_cycles;
@@ -257,6 +265,7 @@ export class LFS {
 
         // allocate memory
         this._lfs_config = _lfs_new_config(
+            this.read_size, this.prog_size,
             this.block_size, this.block_count,
             this.block_cycles);
         this._lfs = _lfs_new();
@@ -284,6 +293,7 @@ export class LFS {
 
         // allocate memory
         this._lfs_config = _lfs_new_config(
+            this.read_size, this.prog_size,
             this.block_size, this.block_count,
             this.block_cycles);
         this._lfs = _lfs_new();

@@ -1,6 +1,6 @@
 TARGET = lfs.js
 
-CC = emcc
+CC = /usr/lib/emscripten/emcc
 AR = ar
 SIZE = size
 
@@ -32,7 +32,7 @@ LFLAGS += -sALLOW_TABLE_GROWTH=1
 LFLAGS += -sDYNAMIC_EXECUTION=0
 LFLAGS += -sWASM=0
 LFLAGS += -sSINGLE_FILE=1
-LFLAGS += -sENVIRONMENT="shell,web"
+LFLAGS += -sENVIRONMENT="shell,web,node"
 LFLAGS += -sASYNCIFY
 LFLAGS += -sASSERTIONS
 LFLAGS += -sEXPORTED_RUNTIME_METHODS="['cwrap','addFunction']"
